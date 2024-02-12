@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Proposal To My Mommy ♥</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 70vh;
+      margin: 0;
+      background-color: #f7f7f7;
+    }
+    #message {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+      animation: bounce 2s infinite alternate; /* Bouncing animation */
+    }
+    #buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #FFB6C1;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+    button:hover {
+      background-color: #000000;
+    }
+    button::before {
+      content: '🌸'; /* Flower emoji */
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(0deg) scale(0.8);
+      font-size: 24px;
+      opacity: 0;
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+    button:hover::before {
+      transform: translateX(-50%) rotate(360deg) scale(1);
+      opacity: 1;
+      animation: rotateFlower 1.5s infinite linear; /* Flower rotation animation */
+    }
+    #madCat {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+  <script>
+    function onNoButtonClick() {
+      const noButton = document.getElementById('noButton');
+      const randomX = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
+      const randomY = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
+      
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
+
+    const madCatImages = [
+      'img/mad cat.jpg',
+      'img/mad cat2.jpg',
+      'img/mad cat3.jpg',
+      'img/mad cat4.jpg',
+      'img/mad cat5.jpg',
+      // Add more image filenames as needed
+    ];
+
+    let noButtonClickCount = 0;
+
+    function onNoButtonClick() {
+      noButtonClickCount++;
+
+      if (noButtonClickCount >= 3) {
+        playAudio();
+        const madCatImage = document.getElementById('madCat');
+        const randomImageIndex = Math.floor(Math.random() * madCatImages.length);
+        const randomImageSrc = madCatImages[randomImageIndex];
+
+        madCatImage.src = randomImageSrc;
+        madCatImage.style.display = 'block';
+
+        // Reset the count after showing the mad cat image
+        noButtonClickCount = 0;
+
+        // Hide the mad cat image after 3 seconds
+        setTimeout(() => {
+          madCatImage.style.display = 'none';
+        }, 5000);
+      } else {
+        const noButton = document.getElementById('noButton');
+        const randomX = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
+        const randomY = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
+        
+        noButton.style.position = 'absolute';
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+      }
+    }
+
+    function playAudio() {
+      const audio = new Audio('nosus.mp3'); // Replace 'your_audio_file.mp3' with the actual filename of your audio
+      audio.play();
+
+      // Stop the audio after 3 seconds
+      setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }, 6000);
+    }
+
+    function onYesButtonClick() {
+      playAudio('happysong.mp3');
+      // Redirect to the success.html file
+      window.location.href = 'flower/flower.html';
+    }
+  </script>
+</head>
+<body>
+  <div id="message">
+    <p>I Loveee Youuu So Muchhh</p>
+    <p>Would you be my Valentine and make every moment special po?</p>
+  </div>
+  <div id="buttons">
+    <button onclick="alert('I Love You Mwehehe!'); onYesButtonClick();" onmouseover="this.style.backgroundColor='#2980b9'" onmouseout="this.style.backgroundColor='#3498db'">Yes</button>
+    <button id="noButton" onclick="onNoButtonClick()">No</button>
+  </div>
+  <img id="madCat" src="img/" alt="Mad Cat" width="300" height="200">
+</body>
+</html>
